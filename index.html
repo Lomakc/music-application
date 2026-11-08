@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse Music Player</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-wave-square"></i>
+        </div>
+        <span>Pulse Music</span>
+      </div>
+
+      <nav class="nav-menu">
+        <p class="menu-label">Menu</p>
+        <button class="nav-item active"><i class="fa-solid fa-house"></i> Discover</button>
+        <button class="nav-item"><i class="fa-solid fa-compass"></i> Explore</button>
+        <button class="nav-item"><i class="fa-solid fa-radio"></i> Radio</button>
+        <button class="nav-item"><i class="fa-solid fa-heart"></i> Favorites</button>
+
+        <p class="menu-label">Playlists</p>
+        <div class="playlist-tags">
+          <span class="playlist-pill"><i class="fa-solid fa-bolt"></i> Cyber Focus</span>
+          <span class="playlist-pill"><i class="fa-solid fa-moon"></i> Midnight Chill</span>
+          <span class="playlist-pill"><i class="fa-solid fa-fire"></i> Workout Hype</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <label for="local-audio-upload" class="upload-btn">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload MP3
+        </label>
+        <input type="file" id="local-audio-upload" accept="audio/*" multiple hidden>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Search & Profile Bar -->
+      <header class="top-nav">
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="search-input" placeholder="Search track, artist, album...">
+        </div>
+        <div class="profile-meta">
+          <button class="icon-btn" title="Equalizer Modal" id="eq-btn"><i class="fa-solid fa-sliders"></i></button>
+          <button class="icon-btn" title="Theme"><i class="fa-solid fa-sun"></i></button>
+          <div class="avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+          </div>
+        </div>
+      </header>
+
+      <!-- Featured Banner -->
+      <section class="hero-banner">
+        <div class="hero-content">
+          <span class="badge">Featured Release</span>
+          <h1 id="hero-title">Neon Horizons</h1>
+          <p id="hero-artist">Aether Soundwave • Synthwave Odyssey (2026)</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="hero-play-btn"><i class="fa-solid fa-play"></i> Play Now</button>
+            <button class="btn btn-secondary" id="hero-fav-btn"><i class="fa-regular fa-heart"></i> Add to Favorite</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-disk" id="hero-disk">
+            <img id="hero-cover" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=80" alt="Album Cover">
+            <div class="center-hole"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Track List Section -->
+      <section class="tracks-section">
+        <div class="section-header">
+          <h2>Trending Playlist</h2>
+          <span class="track-count" id="track-count">6 Tracks</span>
+        </div>
+
+        <div class="track-list" id="track-list-container">
+          <!-- Rendered dynamically via JavaScript -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Bottom Player Bar -->
+  <footer class="player-bar">
+    <div class="now-playing">
+      <img id="player-cover" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=80" alt="Cover" class="player-thumb">
+      <div class="track-info">
+        <div class="track-title" id="player-title">Neon Horizons</div>
+        <div class="track-artist" id="player-artist">Aether Soundwave</div>
+      </div>
+      <button class="btn-like" id="player-like-btn" title="Like Track">
+        <i class="fa-regular fa-heart"></i>
+      </button>
+    </div>
+
+    <div class="player-controls-container">
+      <div class="control-buttons">
+        <button class="ctrl-btn" id="shuffle-btn" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
+        <button class="ctrl-btn" id="prev-btn" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="ctrl-btn play-circle" id="master-play" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+        <button class="ctrl-btn" id="next-btn" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="ctrl-btn" id="repeat-btn" title="Repeat"><i class="fa-solid fa-repeat"></i></button>
+      </div>
+
+      <!-- Timeline & Visualizer -->
+      <div class="timeline-container">
+        <span class="time" id="current-time">0:00</span>
+        <div class="progress-bar-wrap" id="progress-container">
+          <div class="progress-fill" id="progress-bar">
+            <span class="progress-handle"></span>
+          </div>
+        </div>
+        <span class="time" id="duration-time">0:00</span>
+      </div>
+    </div>
+
+    <!-- Right Audio & Volume Controls -->
+    <div class="audio-options">
+      <!-- Mini Visualizer Waves -->
+      <div class="wave-visualizer" id="wave-visualizer">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+
+      <div class="volume-slider-group">
+        <button class="icon-btn" id="mute-btn"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" id="volume-range" min="0" max="1" step="0.01" value="0.8">
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hidden Native Audio Element -->
+  <audio id="audio-engine" preload="metadata"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
